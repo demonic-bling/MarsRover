@@ -53,10 +53,10 @@ def Left():
 	GPIO.digitalWrite(Motor2B, GPIO.LOW)
 		
 def Right():
-        GPIO.digitalWrite(Motor1A, GPIO.HIGH)
-        GPIO.digitalWrite(Motor2A, GPIO.LOW)
-        GPIO.digitalWrite(Motor1B, GPIO.LOW)
-        GPIO.digitalWrite(Motor2B, GPIO.HIGH)
+    GPIO.digitalWrite(Motor1A, GPIO.HIGH)
+    GPIO.digitalWrite(Motor2A, GPIO.LOW)
+    GPIO.digitalWrite(Motor1B, GPIO.LOW)
+    GPIO.digitalWrite(Motor2B, GPIO.HIGH)
 
 def USS1Distance():	
 	GPIO.digitalWrite(USSTrig1, GPIO.HIGH)
