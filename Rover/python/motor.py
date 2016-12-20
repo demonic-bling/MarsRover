@@ -3,22 +3,36 @@ from time import sleep
 
 GPIO = webiopi.GPIO
 
-Motor1A = 17
-Motor1B = 18
-Motor2A = 22
-Motor2B = 23
+Motor1A = 17	#Left Side Motor In1
+Motor1B = 18	#Left Side Motor In2
+Motor2A = 22	#Right Side Motor In1
+Motor2B = 23	#Right Side Motor In2
+
+USSTrig1 = 9	#Ultrasonic sensor front Trigger
+USSEcho1 = 13	#Ultrasonic sensor front Echo
 
 def setup():
 	GPIO.setFunction(Motor1A, GPIO.OUT)
 	GPIO.setFunction(Motor2A, GPIO.OUT)
 	GPIO.setFunction(Motor1B, GPIO.OUT)
 	GPIO.setFunction(Motor2B, GPIO.OUT)
+	
+	GPIO.setFunction(USSTrig1, GPIO.OUT)
+	GPIO.setFunction(USSEcho1, GPIO.IN)
+
+	GPIO.digitalWrite(USSTrig1, GPIO.LOW)	#Setting Sensor to Low
+	time.sleep(2)							#Waiting for the trigger to settle in
 
 def forward():
 	GPIO.digitalWrite(Motor1A, GPIO.HIGH)
 	GPIO.digitalWrite(Motor1B, GPIO.LOW)
 	GPIO.digitalWrite(Motor2A, GPIO.HIGH)
 	GPIO.digitalWrite(Motor2B, GPIO.LOW)
+
+	while True:
+		distance = USS1Distance()
+		if(distance <= 30):
+			stop()
 
 def reverse():
 	GPIO.digitalWrite(Motor1A, GPIO.LOW)
@@ -43,6 +57,21 @@ def Right():
         GPIO.digitalWrite(Motor2A, GPIO.LOW)
         GPIO.digitalWrite(Motor1B, GPIO.LOW)
         GPIO.digitalWrite(Motor2B, GPIO.HIGH)
+
+def USS1Distance():	
+	GPIO.digitalWrite(USSTrig1, GPIO.HIGH)
+	time.sleep(0.00001)
+	GPIO.digitalWrite(USSTrig1, GPIO.LOW)
+
+	while GPIO.digitalRead(USSEcho1) == 0:
+		pulse_start = time.time()
+
+	while GPIO.digitalRead(USSEcho1) == 1:
+		pulse_end = time.time()
+
+	pulse_duration = pulse_end - pulse_start
+	distance = pulse_duration * 17150
+	return distance
 
 @webiopi.macro
 def GetSpeed(speed):
