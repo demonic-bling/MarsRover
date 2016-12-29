@@ -56,7 +56,19 @@
 		function TurnRight() {
 			webiopi().callMacro("ButtonTurnRight");
 		}
-		webiopi().ready(init);
+
+		setInterval ("callMacro_getData()", 3000);{
+ 		}
+ 
+ 		function callMacro_getData(){
+ 			webiopi().callMacro("getData",[], macro_getData_Callback);
+ 		}
+ 
+ 		function macro_getData_Callback(macro, args, data) {
+ 			var status = JSON.parse(data);
+ 			document.getElementById('val').innerHTML = status;
+ 		}
+			webiopi().ready(init);
 	</script>
 	<style>
 		html, body {
@@ -131,7 +143,7 @@
 				</div>
 				<div class="arrow-down" onmousedown="Reverse()" onmouseup="Stop()"><a href="#"><img src="../arrow-down.png" alt="Up"></a></div>
 				<div id="slider"></div>
-				<span id="val"></span>
+				<label id="val"></label>
 			</div>
 		</div>
 	</div>
