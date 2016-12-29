@@ -9,7 +9,7 @@ Motor2A = 22	#Right Side Motor In1
 Motor2B = 23	#Right Side Motor In2
 
 USSTrig1 = 9	#Ultrasonic sensor front Trigger
-USSEcho1 = 13	#Ultrasonic sensor front Echo
+USSEcho1 = 25	#Ultrasonic sensor front Echo
 
 def setup():
 	GPIO.setFunction(Motor1A, GPIO.OUT)
@@ -29,10 +29,10 @@ def forward():
 	GPIO.digitalWrite(Motor2A, GPIO.HIGH)
 	GPIO.digitalWrite(Motor2B, GPIO.LOW)
 
-	#while True:
-		#distance = USS1Distance()
-		#if(distance <= 30):
-			#stop()
+	while True:
+		distance = USS1Distance()
+		if(distance <= 30):
+			stop()
 
 def reverse():
 	GPIO.digitalWrite(Motor1A, GPIO.LOW)
