@@ -21,7 +21,6 @@ def setup():
 	GPIO.setFunction(USSEcho1, GPIO.IN)
 
 	GPIO.digitalWrite(USSTrig1, GPIO.LOW)	#Setting Sensor to Low
-	time.sleep(2)							#Waiting for the trigger to settle in
 
 def forward():
 	GPIO.digitalWrite(Motor1A, GPIO.HIGH)
@@ -59,6 +58,7 @@ def Right():
     GPIO.digitalWrite(Motor2B, GPIO.HIGH)
 
 def USS1Distance():	
+	time.sleep(2)								#Waiting for the trigger to settle in
 	GPIO.digitalWrite(USSTrig1, GPIO.HIGH)
 	time.sleep(0.00001)
 	GPIO.digitalWrite(USSTrig1, GPIO.LOW)
