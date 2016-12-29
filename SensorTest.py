@@ -17,31 +17,24 @@ GPIO.setup(ECHO,GPIO.IN)
 
 GPIO.output(TRIG, False)
 
-print "Waiting For Sensor To Settle"
-
-time.sleep(2)
-
-while True:
-	GPIO.output(TRIG, True)
-
+def USS1Distance():	
+	time.sleep(2)								#Waiting for the trigger to settle in
+	GPIO.output(USSTrig1, GPIO.HIGH)
 	time.sleep(0.00001)
+	GPIO.output(USSTrig1, GPIO.LOW)
 
-	GPIO.output(TRIG, False)
-
-	while GPIO.input(ECHO)==0:
-
+	while GPIO.digitalRead(USSEcho1) == 0:
 		pulse_start = time.time()
 
-	while GPIO.input(ECHO)==1:
-
-		pulse_end = time.time()       
+	while GPIO.digitalRead(USSEcho1) == 1:
+		pulse_end = time.time()
 
 	pulse_duration = pulse_end - pulse_start
+	distance = pulse_duration * 17150
+	return distance
 
-    distance = pulse_duration * 17150
-	distance = round(distance, 2)
-	print "Distance:",distance,"cm"
-
-	time.sleep(2)
+while True:
+	status = USS1Distance()
+	print status
 
 GPIO.cleanup()
