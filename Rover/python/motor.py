@@ -1,5 +1,8 @@
 import webiopi
 from time import sleep
+import json
+import sys
+import os
 
 GPIO = webiopi.GPIO
 
@@ -10,6 +13,8 @@ Motor2B = 23	#Right Side Motor In2
 
 USSTrig1 = 9	#Ultrasonic sensor front Trigger
 USSEcho1 = 25	#Ultrasonic sensor front Echo
+
+sys.path.append("/home/pi/WebIOPi-0.7.1/htdocs")
 
 def setup():
 	GPIO.setFunction(Motor1A, GPIO.OUT)
@@ -65,10 +70,10 @@ def USS1Distance():
 	time.sleep(0.00001)
 	GPIO.digitalWrite(USSTrig1, GPIO.LOW)
 
-	while GPIO.digitalRead(USSEcho1) == 0:
+	while GPIO.read(USSEcho1) == 0:
 		pulse_start = time.time()
 
-	while GPIO.digitalRead(USSEcho1) == 1:
+	while GPIO.read(USSEcho1) == 1:
 		pulse_end = time.time()
 
 	pulse_duration = pulse_end - pulse_start
@@ -94,3 +99,7 @@ def ButtonTurnRight():
 @webiopi.macro
 def ButtonStop():
 	stop()
+
+@webiopi.macro
+def getData():
+	status = USS1Distance()
