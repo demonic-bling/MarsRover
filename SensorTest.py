@@ -15,9 +15,13 @@ ECHO = 25
 
 print "Distance Measurement In Progress"
 
-GPIO.setup(TRIG,GPIO.OUT)
-
-GPIO.setup(ECHO,GPIO.IN)
+GPIO.setup(Motor1A, GPIO.OUT)
+GPIO.setup(Motor2A, GPIO.OUT)
+GPIO.setup(Motor1B, GPIO.OUT)
+GPIO.setup(Motor2B, GPIO.OUT)
+	
+GPIO.setup(USSTrig1, GPIO.OUT)
+GPIO.setup(USSEcho1, GPIO.IN)
 
 GPIO.output(TRIG, False)
 
@@ -72,5 +76,6 @@ while True:
 	status = USS1Distance()
 	if(status < 30):
 		stop()
+		break
 
 GPIO.cleanup()
