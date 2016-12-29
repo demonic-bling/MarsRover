@@ -87,9 +87,3 @@ def ButtonTurnRight():
 @webiopi.macro
 def ButtonStop():
 	stop()
-
-while True:
-	distance = USS1Distance()
-	if(distance <= 30):
-		stop()
-	
