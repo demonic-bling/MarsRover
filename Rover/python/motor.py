@@ -22,6 +22,14 @@ def setup():
 
 	GPIO.digitalWrite(USSTrig1, GPIO.LOW)	#Setting Sensor to Low
 
+def loop():
+	distance = USS1Distance()
+	if(distance < 30.00)
+		forward()
+		time.sleep(1)
+		Left()
+		time.sleep(1)
+
 def forward():
 	GPIO.digitalWrite(Motor1A, GPIO.HIGH)
 	GPIO.digitalWrite(Motor1B, GPIO.LOW)
