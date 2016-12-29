@@ -23,8 +23,7 @@ def setup():
 	GPIO.digitalWrite(USSTrig1, GPIO.LOW)	#Setting Sensor to Low
 
 def loop():
-	distance = USS1Distance()
-	if(float(distance) < 30.00):
+	if(float(USS1Distance()) < 30):
 		forward()
 		time.sleep(1)
 		Left()
