@@ -74,10 +74,6 @@ def USS1Distance():
 	return distance
 
 @webiopi.macro
-def GetSpeed(speed):
-	GPIO.PulseRatio(Motor3A, float(speed))
-
-@webiopi.macro
 def ButtonForward():
 	forward()
 
