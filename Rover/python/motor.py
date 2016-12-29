@@ -28,11 +28,6 @@ def forward():
 	GPIO.digitalWrite(Motor2A, GPIO.HIGH)
 	GPIO.digitalWrite(Motor2B, GPIO.LOW)
 
-	while True:
-		distance = USS1Distance()
-		if(distance <= 30):
-			stop()
-
 def reverse():
 	GPIO.digitalWrite(Motor1A, GPIO.LOW)
 	GPIO.digitalWrite(Motor1B, GPIO.HIGH)
@@ -93,3 +88,9 @@ def ButtonTurnRight():
 def ButtonStop():
 	stop()
 
+while True:
+	distance = USS1Distance()
+	if(distance <= 30):
+		print distance
+		stop()
+	
