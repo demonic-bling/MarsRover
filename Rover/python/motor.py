@@ -24,7 +24,7 @@ def setup():
 
 def loop():
 	distance = USS1Distance()
-	if(distance < 30.00):
+	if(float(distance) < 30.00):
 		forward()
 		time.sleep(1)
 		Left()
