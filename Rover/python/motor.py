@@ -91,6 +91,5 @@ def ButtonStop():
 while True:
 	distance = USS1Distance()
 	if(distance <= 30):
-		print distance
 		stop()
 	
