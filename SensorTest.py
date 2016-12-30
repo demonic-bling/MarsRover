@@ -24,7 +24,7 @@ GPIO.setup(USSTrig1, GPIO.OUT)
 GPIO.setup(USSEcho1, GPIO.IN)
 
 GPIO.output(USSTrig1, False)
-sleep(2)
+time.sleep(2)
 
 def forward():
 	GPIO.output(Motor1A, GPIO.HIGH)
@@ -77,9 +77,9 @@ while True:
 	print status
 	if(status < 30):
 		reverse()
-		sleep(0.75)
+		time.sleep(0.75)
 		Left()
-		sleep(0.75)
+		time.sleep(0.75)
 		stop()
 
 GPIO.cleanup()
