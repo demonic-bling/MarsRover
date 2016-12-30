@@ -44,8 +44,6 @@ def reverse():
 	pwm3.ChangeDutyCycle(50)
 	pwm4.ChangeDutyCycle(50)
 
-
-
 def stop():
 	GPIO.output(Motor1A, GPIO.LOW)
 	GPIO.output(Motor1B, GPIO.LOW)
@@ -59,7 +57,7 @@ def Left():
 	pwm4.ChangeDutyCycle(0)
 		
 def Right():
-    pwm1.ChangeDutyCycle(90)
+	pwm1.ChangeDutyCycle(90)
 	pwm2.ChangeDutyCycle(0)
 	pwm3.ChangeDutyCycle(0)
 	pwm4.ChangeDutyCycle(90)
