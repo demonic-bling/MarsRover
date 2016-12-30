@@ -86,7 +86,8 @@ def USS1Distance():
 	distance = pulse_duration * 17150
 	return distance
 
-while True:
+try:
+	while True:
 	forward()
 	status = USS1Distance()
 	print status
@@ -96,5 +97,11 @@ while True:
 		Left()
 		time.sleep(0.75)
 		stop()
+except KeyboardInterrupt:
+	pass
 
+pwm1.stop()
+pwm2.stop()
+pwm3.stop()
+pwm4.stop()
 GPIO.cleanup()
