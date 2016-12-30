@@ -15,10 +15,10 @@ USSEcho1 = 25
 
 print "Distance Measurement In Progress"
 
-GPIO.setup(Motor1A, GPIO.output)
-GPIO.setup(Motor2A, GPIO.output)
-GPIO.setup(Motor1B, GPIO.output)
-GPIO.setup(Motor2B, GPIO.output)
+GPIO.setup(Motor1A, GPIO.OUT)
+GPIO.setup(Motor2A, GPIO.OUT)
+GPIO.setup(Motor1B, GPIO.OUT)
+GPIO.setup(Motor2B, GPIO.OUT)
 
 
 pwm1 = GPIO.PWM(Motor1A, 1000)
