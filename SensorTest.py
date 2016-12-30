@@ -10,8 +10,8 @@ Motor1B = 18	#Left Side Motor In2
 Motor2A = 22	#Right Side Motor In1
 Motor2B = 23	#Right Side Motor In2
 
-TRIG = 9
-ECHO = 25
+USSTrig1 = 9
+USSEcho1 = 25
 
 print "Distance Measurement In Progress"
 
@@ -23,7 +23,8 @@ GPIO.setup(Motor2B, GPIO.OUT)
 GPIO.setup(USSTrig1, GPIO.OUT)
 GPIO.setup(USSEcho1, GPIO.IN)
 
-GPIO.output(TRIG, False)
+GPIO.output(USSTrig1, False)
+sleep(2)
 
 def forward():
 	GPIO.output(Motor1A, GPIO.HIGH)
@@ -56,7 +57,6 @@ def Right():
     GPIO.output(Motor2B, GPIO.HIGH)
 
 def USS1Distance():	
-	time.sleep(2)								#Waiting for the trigger to settle in
 	GPIO.output(USSTrig1, GPIO.HIGH)
 	time.sleep(0.00001)
 	GPIO.output(USSTrig1, GPIO.LOW)
@@ -72,10 +72,14 @@ def USS1Distance():
 	return distance
 
 while True:
-	reverse()
+	forward()
 	status = USS1Distance()
+	print status
 	if(status < 30):
+		reverse()
+		sleep(0.75)
+		Left()
+		sleep(0.75)
 		stop()
-		break
 
 GPIO.cleanup()
