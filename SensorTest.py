@@ -15,6 +15,8 @@ USSEcho1 = 25
 
 print "Distance Measurement In Progress"
 
+GPIO.cleanup()
+
 GPIO.setup(Motor1A, GPIO.OUT)
 GPIO.setup(Motor2A, GPIO.OUT)
 GPIO.setup(Motor1B, GPIO.OUT)
@@ -88,7 +90,7 @@ while True:
 	forward()
 	status = USS1Distance()
 	print status
-	if(status < 40):
+	if(status < 60):
 		reverse()
 		time.sleep(0.75)
 		Left()
