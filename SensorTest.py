@@ -88,15 +88,16 @@ def USS1Distance():
 
 try:
 	while True:
-	forward()
-	status = USS1Distance()
-	print status
-	if(status < 60):
-		reverse()
-		time.sleep(0.75)
-		Left()
-		time.sleep(0.75)
-		stop()
+		forward()
+		status = USS1Distance()
+		print status
+		if(status < 60):
+			reverse()
+			time.sleep(0.75)
+			Left()
+			time.sleep(0.75)
+			stop()
+			
 except KeyboardInterrupt:
 	pass
 
