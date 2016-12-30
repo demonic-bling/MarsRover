@@ -41,16 +41,16 @@ print 'Waiting for sensors to settle'
 time.sleep(2)
 
 def forward():
-	pwm1.ChangeDutyCycle(50)
-	pwm2.ChangeDutyCycle(50)
+	pwm1.ChangeDutyCycle(40)
+	pwm2.ChangeDutyCycle(40)
 	pwm3.ChangeDutyCycle(0)
 	pwm4.ChangeDutyCycle(0)
 
 def reverse():
 	pwm1.ChangeDutyCycle(0)
 	pwm2.ChangeDutyCycle(0)
-	pwm3.ChangeDutyCycle(50)
-	pwm4.ChangeDutyCycle(50)
+	pwm3.ChangeDutyCycle(40)
+	pwm4.ChangeDutyCycle(40)
 
 def stop():
 	GPIO.output(Motor1A, GPIO.LOW)
@@ -60,15 +60,15 @@ def stop():
 
 def Left():
 	pwm1.ChangeDutyCycle(0)
-	pwm2.ChangeDutyCycle(90)
-	pwm3.ChangeDutyCycle(90)
+	pwm2.ChangeDutyCycle(99)
+	pwm3.ChangeDutyCycle(99)
 	pwm4.ChangeDutyCycle(0)
 		
 def Right():
-	pwm1.ChangeDutyCycle(90)
+	pwm1.ChangeDutyCycle(99)
 	pwm2.ChangeDutyCycle(0)
 	pwm3.ChangeDutyCycle(0)
-	pwm4.ChangeDutyCycle(90)
+	pwm4.ChangeDutyCycle(99)
 		
 def USS1Distance():	
 	time.sleep(1)
