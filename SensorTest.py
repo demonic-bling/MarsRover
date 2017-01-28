@@ -10,11 +10,17 @@ Motor1B = 18	#Left Side Motor In2
 Motor2A = 22	#Right Side Motor In1
 Motor2B = 23	#Right Side Motor In2
 
-USSTrig1 = 9
-USSEcho1 = 25
+FrontUSSTrig = 9	#Front Sensor Trigger
+FrontUSSEcho = 25	#Front Sensor Echo
 
-USSTrig2 = 11
-USSEcho2 = 8
+BackUSSTrig = 11	#Back Sensor Trigger
+BackUSSEcho = 8		#Back Sensor Echo
+
+LeftUSSTrig = 30	#Left Sensor Trigger
+LeftUSSEcho = 30	#Left Sensor Echo
+
+RightUSSTrig = 30	#Right Sensor Trigger
+RightUSSEcho = 30	#Right Sensor Echo
 
 print "Distance Measurement In Progress"
 
@@ -36,13 +42,13 @@ pwm2.start(0)
 pwm3.start(0)
 pwm4.start(0)
 	
-GPIO.setup(USSTrig1, GPIO.OUT)
-GPIO.setup(USSEcho1, GPIO.IN)
-GPIO.setup(USSTrig2, GPIO.OUT)
-GPIO.setup(USSEcho2, GPIO.IN)
+GPIO.setup(FrontUSSTrig, GPIO.OUT)
+GPIO.setup(FrontUSSEcho, GPIO.IN)
+GPIO.setup(BackUSSTrig, GPIO.OUT)
+GPIO.setup(BackUSSEcho, GPIO.IN)
 
-GPIO.output(USSTrig1, False)
-GPIO.output(USSTrig2, False)
+GPIO.output(FrontUSSTrig, False)
+GPIO.output(BackUSSTrig, False)
 print 'Waiting for sensors to settle'
 time.sleep(2)
 
@@ -76,32 +82,64 @@ def Right():
 	pwm3.ChangeDutyCycle(0)
 	pwm4.ChangeDutyCycle(99)
 		
-def USS1Distance():	
+def FrontUSSDistance():	
 	time.sleep(1)
-	GPIO.output(USSTrig1, GPIO.HIGH)
+	GPIO.output(FrontUSSTrig, GPIO.HIGH)
 	time.sleep(0.00001)
-	GPIO.output(USSTrig1, GPIO.LOW)
+	GPIO.output(FrontUSSTrig, GPIO.LOW)
 
-	while GPIO.input(USSEcho1) == 0:
+	while GPIO.input(FrontUSSEcho) == 0:
 		pulse_start = time.time()
 
-	while GPIO.input(USSEcho1) == 1:
+	while GPIO.input(FrontUSSEcho) == 1:
 		pulse_end = time.time()
 
 	pulse_duration = pulse_end - pulse_start
 	distance = pulse_duration * 17150
 	return distance
 
-def USS2Distance():	
+def LeftUSSDistance():	
 	time.sleep(1)
-	GPIO.output(USSTrig2, GPIO.HIGH)
+	GPIO.output(LeftUSSTrig, GPIO.HIGH)
 	time.sleep(0.00001)
-	GPIO.output(USSTrig2, GPIO.LOW)
+	GPIO.output(LeftUSSTrig, GPIO.LOW)
 
-	while GPIO.input(USSEcho2) == 0:
+	while GPIO.input(LeftUSSEcho) == 0:
 		pulse_start = time.time()
 
-	while GPIO.input(USSEcho2) == 1:
+	while GPIO.input(LeftUSSEcho) == 1:
+		pulse_end = time.time()
+
+	pulse_duration = pulse_end - pulse_start
+	distance = pulse_duration * 17150
+	return distance
+
+def RightUSSDistance():	
+	time.sleep(1)
+	GPIO.output(RightUSSTrig, GPIO.HIGH)
+	time.sleep(0.00001)
+	GPIO.output(RightUSSTrig, GPIO.LOW)
+
+	while GPIO.input(RightUSSEcho) == 0:
+		pulse_start = time.time()
+
+	while GPIO.input(RightUSSEcho) == 1:
+		pulse_end = time.time()
+
+	pulse_duration = pulse_end - pulse_start
+	distance = pulse_duration * 17150
+	return distance
+
+def BackUSSDistance():	
+	time.sleep(1)
+	GPIO.output(BackUSSTrig, GPIO.HIGH)
+	time.sleep(0.00001)
+	GPIO.output(BackUSSTrig, GPIO.LOW)
+
+	while GPIO.input(BackUSSEcho) == 0:
+		pulse_start = time.time()
+
+	while GPIO.input(BackUSSEcho) == 1:
 		pulse_end = time.time()
 
 	pulse_duration = pulse_end - pulse_start
@@ -111,10 +149,16 @@ def USS2Distance():
 try:
 	while True:
 		forward()
-		fwdDist = USS1Distance()
-		bwdDist = USS2Distance()
+		fwdDist = FrontUSSDistance()
+		bwdDist = BackUSSDistance()
+		leftDist = LeftUSSDistance()
+		rightDist = RightUSSDistance()
+
 		print "Front", fwdDist
 		print "Back", bwdDist
+		print "Left", leftDist
+		print "Right", rightDist
+
 		if(fwdDist < 70):
 			if(bwdDist > 50):
 				reverse()
