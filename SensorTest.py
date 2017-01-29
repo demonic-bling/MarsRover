@@ -52,16 +52,16 @@ print 'Waiting for sensors to settle'
 time.sleep(2)
 
 def forward():
-	pwm1.ChangeDutyCycle(40)
-	pwm2.ChangeDutyCycle(40)
+	pwm1.ChangeDutyCycle(25)
+	pwm2.ChangeDutyCycle(25)
 	pwm3.ChangeDutyCycle(0)
 	pwm4.ChangeDutyCycle(0)
 
 def reverse():
 	pwm1.ChangeDutyCycle(0)
 	pwm2.ChangeDutyCycle(0)
-	pwm3.ChangeDutyCycle(40)
-	pwm4.ChangeDutyCycle(40)
+	pwm3.ChangeDutyCycle(25)
+	pwm4.ChangeDutyCycle(25)
 
 def stop():
 	GPIO.output(Motor1A, GPIO.LOW)
