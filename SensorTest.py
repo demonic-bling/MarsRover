@@ -148,7 +148,7 @@ def BackUSSDistance():
 
 try:
 	while True:
-		forward()
+
 		fwdDist = FrontUSSDistance()
 		bwdDist = BackUSSDistance()
 		leftDist = LeftUSSDistance()
@@ -159,15 +159,39 @@ try:
 		print "Left", leftDist
 		print "Right", rightDist
 
+		if(max(fwdDist, leftDist, rightDist) == fwdDist):
+			forward()
+
+		elif(max(fwdDist, leftDist, rightDist) == leftDist):
+			Left()
+			time.sleep(1)
+			stop()
+			continue
+
+		elif(max(fwdDist, leftDist, rightDist) == rightDist):
+			Right()
+			time.sleep(1)
+			stop()
+			continue
+
 		if(fwdDist < 70):
 			if(bwdDist > 50):
 				reverse()
 				time.sleep(0.75)
-				Left()
+
+				if(max(leftDist, rightDist) == leftDist):
+					Left()
+				else :
+					Right()
+
 				time.sleep(0.75)
 				stop()
 			else:
-				Left()
+				
+				if(max(leftDist, rightDist) == leftDist):
+					Left()
+				else :
+					Right()
 				time.sleep(1)
 				stop()
 				
