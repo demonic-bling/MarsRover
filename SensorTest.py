@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-
 import time
 
 GPIO.setmode(GPIO.BCM)
@@ -16,11 +15,11 @@ FrontUSSEcho = 25	#Front Sensor Echo
 BackUSSTrig = 11	#Back Sensor Trigger
 BackUSSEcho = 8		#Back Sensor Echo
 
-LeftUSSTrig = 30	#Left Sensor Trigger
-LeftUSSEcho = 30	#Left Sensor Echo
+# LeftUSSTrig = 30	#Left Sensor Trigger
+# LeftUSSEcho = 30	#Left Sensor Echo
 
-RightUSSTrig = 30	#Right Sensor Trigger
-RightUSSEcho = 30	#Right Sensor Echo
+# RightUSSTrig = 30	#Right Sensor Trigger
+# RightUSSEcho = 30	#Right Sensor Echo
 
 print "Distance Measurement In Progress"
 
@@ -98,37 +97,37 @@ def FrontUSSDistance():
 	distance = pulse_duration * 17150
 	return distance
 
-def LeftUSSDistance():	
-	time.sleep(1)
-	GPIO.output(LeftUSSTrig, GPIO.HIGH)
-	time.sleep(0.00001)
-	GPIO.output(LeftUSSTrig, GPIO.LOW)
+# def LeftUSSDistance():	
+# 	time.sleep(1)
+# 	GPIO.output(LeftUSSTrig, GPIO.HIGH)
+# 	time.sleep(0.00001)
+# 	GPIO.output(LeftUSSTrig, GPIO.LOW)
 
-	while GPIO.input(LeftUSSEcho) == 0:
-		pulse_start = time.time()
+# 	while GPIO.input(LeftUSSEcho) == 0:
+# 		pulse_start = time.time()
 
-	while GPIO.input(LeftUSSEcho) == 1:
-		pulse_end = time.time()
+# 	while GPIO.input(LeftUSSEcho) == 1:
+# 		pulse_end = time.time()
 
-	pulse_duration = pulse_end - pulse_start
-	distance = pulse_duration * 17150
-	return distance
+# 	pulse_duration = pulse_end - pulse_start
+# 	distance = pulse_duration * 17150
+# 	return distance
 
-def RightUSSDistance():	
-	time.sleep(1)
-	GPIO.output(RightUSSTrig, GPIO.HIGH)
-	time.sleep(0.00001)
-	GPIO.output(RightUSSTrig, GPIO.LOW)
+# def RightUSSDistance():	
+# 	time.sleep(1)
+# 	GPIO.output(RightUSSTrig, GPIO.HIGH)
+# 	time.sleep(0.00001)
+# 	GPIO.output(RightUSSTrig, GPIO.LOW)
 
-	while GPIO.input(RightUSSEcho) == 0:
-		pulse_start = time.time()
+# 	while GPIO.input(RightUSSEcho) == 0:
+# 		pulse_start = time.time()
 
-	while GPIO.input(RightUSSEcho) == 1:
-		pulse_end = time.time()
+# 	while GPIO.input(RightUSSEcho) == 1:
+# 		pulse_end = time.time()
 
-	pulse_duration = pulse_end - pulse_start
-	distance = pulse_duration * 17150
-	return distance
+# 	pulse_duration = pulse_end - pulse_start
+# 	distance = pulse_duration * 17150
+# 	return distance
 
 def BackUSSDistance():	
 	time.sleep(1)
@@ -151,49 +150,52 @@ try:
 
 		fwdDist = FrontUSSDistance()
 		bwdDist = BackUSSDistance()
-		leftDist = LeftUSSDistance()
-		rightDist = RightUSSDistance()
+		# leftDist = LeftUSSDistance()
+		# rightDist = RightUSSDistance()
 
 		print "Front", fwdDist
 		print "Back", bwdDist
-		print "Left", leftDist
-		print "Right", rightDist
+		# print "Left", leftDist
+		# print "Right", rightDist
 
-		if(max(fwdDist, leftDist, rightDist) == fwdDist):
-			forward()
+		# if(max(fwdDist, leftDist, rightDist) == fwdDist):
+		# 	forward()
 
-		elif(max(fwdDist, leftDist, rightDist) == leftDist):
-			Left()
-			time.sleep(1)
-			stop()
-			continue
+		# elif(max(fwdDist, leftDist, rightDist) == leftDist):
+		# 	Left()
+		# 	time.sleep(1)
+		# 	stop()
+		# 	continue
 
-		elif(max(fwdDist, leftDist, rightDist) == rightDist):
-			Right()
-			time.sleep(1)
-			stop()
-			continue
+		# elif(max(fwdDist, leftDist, rightDist) == rightDist):
+		# 	Right()
+		# 	time.sleep(1)
+		# 	stop()
+		# 	continue
 
 		if(fwdDist < 70):
 			if(bwdDist > 50):
 				reverse()
-				time.sleep(0.75)
+				time.sleep(1)
 
-				if(max(leftDist, rightDist) == leftDist):
-					Left()
-				else :
-					Right()
-
+				# if(max(leftDist, rightDist) == leftDist):
+				# 	Left()
+				# else :
+				# 	Right()
+				Left()
 				time.sleep(0.75)
 				stop()
 			else:
 				
-				if(max(leftDist, rightDist) == leftDist):
-					Left()
-				else :
-					Right()
+				# if(max(leftDist, rightDist) == leftDist):
+				# 	Left()
+				# else :
+				# 	Right()
+				Left()
 				time.sleep(1)
 				stop()
+		else:
+			forward()
 				
 except KeyboardInterrupt:
 	pass
